@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:async';
 
-
 class FormController extends GetxController {
   // Form Data
   var location = ''.obs;
@@ -18,7 +17,7 @@ class FormController extends GetxController {
   var currentStep = 1.obs;
   var isLoading = false.obs;
   var isSubmitted = false.obs;
-  
+
   late PageController pageController;
 
   @override
@@ -54,9 +53,9 @@ class FormController extends GetxController {
       );
 
       if (currentStep.value == 2) {
-         context.go('/step/2?location=${location.value}');
+        context.go('/step/2?location=${location.value}');
       } else {
-         context.go('/step/${currentStep.value}?location=${location.value}');
+        context.go('/step/${currentStep.value}?location=${location.value}');
       }
     }
   }
@@ -73,43 +72,34 @@ class FormController extends GetxController {
     }
   }
 
-  // --- FIXED SUBMIT FUNCTION ---
-// Update inside FormController
+  Future<bool> submitLead() async {
+    isLoading.value = true;
+    try {
+      print("Attempting to submit data to Firestore...");
 
-// Inside FormController
+      await FirebaseFirestore.instance.collection('leads').add({
+        'location': location.value,
+        'timeline': timeline.value,
+        'description': description.value,
+        'full_name': fullName.value,
+        'email': email.value,
+        'phone': phone.value,
+        'submitted_at': FieldValue.serverTimestamp(),
+        'status': 'New',
+      });
 
-Future<bool> submitLead() async { // <--- Return Type changed to Future<bool>
-  isLoading.value = true;
-  try {
-    print("Attempting to submit data to Firestore...");
-    
-    await FirebaseFirestore.instance.collection('leads').add({
-      'location': location.value,
-      'timeline': timeline.value,
-      'description': description.value,
-      'full_name': fullName.value,
-      'email': email.value,
-      'phone': phone.value,
-      'submitted_at': FieldValue.serverTimestamp(),
-      'status': 'New',
-    });
-    
-    print("✅ Data submitted successfully!");
-    isSubmitted.value = true;
-    
-    // Thora delay taake user ko loading feel ho
-    await Future.delayed(const Duration(seconds: 1)); 
-    
-    return true; // <--- Success : True wapis bhejo
+      print("✅ Data submitted successfully!");
+      isSubmitted.value = true;
 
-  } catch (e) {
-    print("❌ Error Submitting: $e");
-    Get.snackbar("Error", "Something went wrong: $e");
-    return false; // <--- Fail : False wapis bhejo
-  } finally {
-    isLoading.value = false;
-    // YAHAN SE 'nextStep' HATA DIYA HAI
+      await Future.delayed(const Duration(seconds: 1));
+
+      return true;
+    } catch (e) {
+      print("❌ Error Submitting: $e");
+      Get.snackbar("Error", "Something went wrong: $e");
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
   }
 }
-}
-

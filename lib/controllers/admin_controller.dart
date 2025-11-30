@@ -1,5 +1,3 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,8 +18,12 @@ class AdminController extends GetxController {
       );
       context.go('/admin/dashboard');
     } catch (e) {
-      Get.snackbar("Login Failed", e.toString(), 
-        snackPosition: SnackPosition.BOTTOM, margin: const EdgeInsets.all(20));
+      Get.snackbar(
+        "Login Failed",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        margin: const EdgeInsets.all(20),
+      );
     } finally {
       isLoading.value = false;
     }

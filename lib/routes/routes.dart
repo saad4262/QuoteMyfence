@@ -1,5 +1,3 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -9,8 +7,7 @@ import 'package:quotefence/view/login_screen.dart';
 import 'package:quotefence/view/onboarding_screen.dart';
 
 final router = GoRouter(
-  // initialLocation: '/step/1',
-    initialLocation: '/login',
+  initialLocation: '/login',
 
   routes: [
     GoRoute(
@@ -23,10 +20,7 @@ final router = GoRouter(
         return OnboardingScreen(stepId: stepId);
       },
     ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginScreen(),
-    ),
+    GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
     GoRoute(
       path: '/admin/dashboard',
       builder: (context, state) {
