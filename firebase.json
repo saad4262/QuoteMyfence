@@ -1,0 +1,55 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "quotemyfence-2",
+          "appId": "1:100266890632:android:133bf8a9e1be12975d163d",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "quotemyfence-2",
+          "appId": "1:100266890632:ios:b4032314832746275d163d",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "quotemyfence-2",
+          "appId": "1:100266890632:ios:b4032314832746275d163d",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "quotemyfence-2",
+          "configurations": {
+            "android": "1:100266890632:android:133bf8a9e1be12975d163d",
+            "ios": "1:100266890632:ios:b4032314832746275d163d",
+            "macos": "1:100266890632:ios:b4032314832746275d163d",
+            "web": "1:100266890632:web:87561370fec9114b5d163d",
+            "windows": "1:100266890632:web:82923ed72b9293675d163d"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
